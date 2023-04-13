@@ -1,0 +1,41 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+ 
+typedef long long ll;
+ 
+int smallestDivisor(int n)
+{
+    if (n % 2 == 0)
+        return 2;
+    for (int i = 3; i * i <= n; i += 2) {
+        if (n % i == 0)
+            return i;
+    }
+ 
+    return n;
+}
+ 
+void solve() {
+	int n;
+	cin>>n;
+	ll first,second;
+	ll min = n;
+	if(n%2 == 0) {
+		first = n/2;
+		second = n/2;
+	}
+	else{
+		ll num = smallestDivisor(n);
+		first = (n)/num;
+		second = (n*(num-1))/num;
+	}
+	cout<<first<<" "<<second<<endl;
+	
+}
+ 
+int main() {
+	int t;
+	cin>>t;
+	while(t--) solve();
+}
