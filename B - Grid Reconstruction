@@ -1,0 +1,57 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+ 
+typedef long long ll;
+ 
+ll gcd(ll n1,ll n2){
+	if ( n2 > n1) {   
+    ll temp = n2;
+    n2 = n1;
+    n1 = temp;
+  	}
+	ll hcf;
+  	for (ll i = 1; i <=  n2; ++i) {
+    	if (n1 % i == 0 && n2 % i ==0) {
+      	hcf = i;
+    	}
+  	}
+  	return hcf;
+}
+ 
+void solve() {
+	ll x;
+	cin>>x;
+	vector <vector<ll>> out(2,vector<ll> (x));
+	ll maxx = 2*x;
+	out[0][0] = maxx;
+	out[1][x-1] = maxx - 1;
+	ll fend = 1;
+	ll bend = maxx - 2;
+	for(int i = 0;i<x-1;i++){
+		if(i & 1){
+			out[1][i] = bend - 1;
+			out[0][i+1] = bend;
+			bend =  bend - 2;
+		}
+		else{
+			out[1][i] = fend;
+			out[0][i+1]  = fend + 1;
+			fend = fend + 2;
+		}
+	}
+	for(int i = 0;i<2;i++){
+		for(int j = 0;j<x;j++){
+			cout<<out[i][j]<<" ";
+		}
+		cout<<endl;
+	}
+}
+ 
+int main() {
+	int t;
+	cin>>t;
+	while(t--){
+		solve();
+	}
+}
