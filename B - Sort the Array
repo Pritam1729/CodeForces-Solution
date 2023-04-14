@@ -1,0 +1,100 @@
+/*
+pritam95272
+*/
+/*
+knowledge is wealth
+*/
+ 
+#include <iostream> 
+#include <sstream> 
+#include <cstdio> 
+#include <cmath> 
+#include <cstring> 
+#include <cctype> 
+#include <string> 
+#include <vector> 
+#include <list> 
+#include <set> 
+#include <map> 
+#include <queue> 
+#include <stack> 
+#include <algorithm> 
+#include <functional> 
+using namespace std;  
+ 
+#define DEBUG(x) cout << '>' << #x << ':' << x << endl; 
+#define REP(i,n) for(int i=0;i<(n);i++) 
+#define FOR(i,a,b) for(int i=(a);i<=(b);i++) 
+#define FORD(i,a,b) for(int i=(a);i>=(b);i--) 
+inline bool EQ(double a, double b) { return fabs(a-b) < 1e-9; } 
+ 
+const int INF = 1<<29; 
+typedef long long ll; 
+ 
+inline int two(int n) { return 1 << n; } 
+inline int test(int n, int b) { return (n>>b)&1; } 
+inline void set_bit(int & n, int b) { n |= two(b); } 
+inline void unset_bit(int & n, int b) { n &= ~two(b); } 
+inline int last_bit(int n) { return n & (-n); } 
+inline int ones(int n) { int res = 0; while(n && ++res) n-=n&(-n); return res; } 
+ 
+template<class T> void chmax(T & a, const T & b) { a = max(a, b); } 
+template<class T> void chmin(T & a, const T & b) { a = min(a, b); } 
+///////////////////////////////////////////////////////////////////// 
+ 
+void solve() {
+    ll a[100005],b[100005];
+    ll n; cin>>n;
+    ll frontindex = -1,backindex = -1;
+    FOR(i,1,n){
+        cin>>a[i];
+        b[i] = a[i];
+    }
+    sort(a+1,a+n+1);
+    // ll hash[100005] = {0};
+    bool found =  false;
+    FOR(i,1,n){
+        if(a[i]!=b[i]){
+            // hash[a[i]] = i;
+            found = true;
+            if(frontindex == -1){
+                frontindex = i;
+            }
+        }
+    }
+    FORD(i,n,1){
+        if(a[i]!=b[i]){
+            if(backindex == -1){
+                backindex = i;
+                break;
+            }
+        }
+    }
+    if(!found){
+        cout<<"yes"<<endl;
+        cout<<1<<" "<<1<<endl;
+    }
+    else{
+        ll i = frontindex,j = backindex;
+        while(i<=backindex && j>=frontindex && a[i] == b[j]){
+            j--;
+            i++;
+        } 
+        if(i == backindex+1 && j == frontindex-1){
+            cout<<"yes"<<endl;
+            cout<<frontindex<<" "<<backindex<<endl;
+        }
+        else{
+            cout<<"no"<<endl;
+        }
+    }
+    
+ 
+} 
+ 
+int main() 
+{ 
+    int t = 1; //cin>>t;
+    while(t--) solve();
+    return 0; 
+}
