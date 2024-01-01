@@ -1,0 +1,36 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+ 
+void solve() {
+    int n,k;
+    cin>>n>>k;
+    // vector <int> v(n);
+    long long count = 1;
+    long long temp;
+    while(n--) {
+        cin>>temp;
+        count = count*temp;
+        // if(count > 2023) {
+        //     cout<<"NO"<<endl;
+        //     return;
+        // }
+    }
+    if(2023%count !=0) {
+        cout<<"NO"<<endl;
+        return ;
+    }
+    else{
+        int ans = 2023/count;
+        cout<<"YES"<<endl;
+        for(int i = 0;i<k-1;i++) cout<<1<<" ";
+        cout<<ans<<endl;
+        return;
+    }
+}
+ 
+int main() {
+    int t;
+    cin>>t;
+    while(t--) solve();
+}
